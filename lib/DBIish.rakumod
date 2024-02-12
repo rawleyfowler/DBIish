@@ -28,9 +28,9 @@ my $err-handler = DBDish::ErrorHandling.new(:parent(Nil));
 method err { $err-handler.err };
 method errstr { $err-handler.errstr };
 
-method connect( $driver ) {
+method connect( $driver, *%args ) {
     my $d = self.install-driver( $driver );
-    return $d.connect(|%_);
+    return $d.connect(|%args);
 
     CATCH {default {self!handle-library-exception($_, $driver)}}
 }
